@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { CastleIcon } from "lucide-react";
 import { BlogList } from "./BlogList";
+import FadeIn from "./FadeIn";
 
 export default function ExpandableCardsGrid({ data }: { data: Section[] }) {
   const cards = data.map((section) => ({
@@ -35,10 +36,18 @@ export default function ExpandableCardsGrid({ data }: { data: Section[] }) {
     }
 
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "auto";
+    };
   }, [active]);
 
   useOutsideClick(ref, () => setActive(null));
+
+  const activeCardId =
+  active && typeof active === "object"
+    ? `card-${active.sectionslug}-${id}`
+    : null;
 
   return (
     <>
@@ -48,15 +57,15 @@ export default function ExpandableCardsGrid({ data }: { data: Section[] }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/40 h-full w-full z-10"
+            className="fixed inset-0 z-10 h-full w-full bg-black/40"
           />
         )}
       </AnimatePresence>
       <AnimatePresence>
         {active && typeof active === "object" ? (
-          <div className="fixed inset-0 grid place-items-center z-[100] py-4">
+          <div className="fixed inset-0 z-100 grid place-items-center py-4">
             <motion.button
-              key={`button-${active.title}-${id}`}
+              key={`button-${activeCardId}`}
               layout
               initial={{
                 opacity: 0,
@@ -70,50 +79,50 @@ export default function ExpandableCardsGrid({ data }: { data: Section[] }) {
                   duration: 0.05,
                 },
               }}
-              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
+              className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-white lg:hidden"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
             </motion.button>
             <motion.div
-              layoutId={`card-${active.title}-${id}`}
+              layoutId={`card-${activeCardId}`}
               ref={ref}
-              className="w-full max-w-[80%] sm:max-w-lg h-[95%] md:h-fit md:max-h-[90%]  flex flex-col bg-white dark:bg-neutral-900 rounded-3xl overflow-hidden"
+              className="flex h-[95%] w-full max-w-[80%] flex-col overflow-hidden rounded-3xl bg-white sm:max-w-lg md:h-fit md:max-h-[90%] dark:bg-neutral-900"
             >
-              <motion.div layoutId={`image-${active.title}-${id}`}>
+              <motion.div layoutId={`image-${activeCardId}`}>
                 <img
                   width={200}
                   height={200}
                   src={active.src}
                   alt={active.title}
-                  className="w-full h-60 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
+                  className="h-60 w-full object-cover object-top sm:rounded-tl-lg sm:rounded-tr-lg lg:h-80"
                 />
               </motion.div>
 
               <div>
-                <div className="flex justify-between items-start p-4">
+                <div className="flex items-start justify-between p-4">
                   <div className="">
                     <motion.h3
-                      layoutId={`title-${active.title}-${id}`}
-                      className="font-medium text-neutral-700 dark:text-neutral-200 text-base"
+                      layoutId={`title-${activeCardId}`}
+                      className="text-base font-medium text-neutral-700 dark:text-neutral-200"
                     >
                       {active.title}
                     </motion.h3>
                     <motion.p
-                      layoutId={`description-${active.description}-${id}`}
-                      className="text-neutral-600 dark:text-neutral-400 text-base"
+                      layoutId={`description-${activeCardId}`}
+                      className="text-base text-neutral-600 dark:text-neutral-400"
                     >
                       {active.description}
                     </motion.p>
                   </div>
                 </div>
-                <div className="pt-4 relative px-4">
+                <div className="relative px-4 pt-4">
                   <motion.div
                     layout
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-neutral-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-400 [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
+                    className="flex h-40 flex-col items-start gap-4 overflow-auto pb-10 text-xs text-neutral-600 [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] md:h-fit md:text-sm lg:text-base dark:text-neutral-400"
                   >
                     {<BlogList blogs={active.blogs} />}
                   </motion.div>
@@ -123,39 +132,44 @@ export default function ExpandableCardsGrid({ data }: { data: Section[] }) {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {cards.map((card, index) => (
-          <motion.div
-            layoutId={`card-${card.title}-${id}`}
-            key={card.title}
-            onClick={() => setActive(card)}
-            className="flex flex-col w-full hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-lg cursor-pointer p-4"
-          >
-            <div className="flex gap-4 flex-col w-full">
-              <motion.div layoutId={`image-${card.title}-${id}`}>
-                <img
-                  src={card.src}
-                  alt={card.title}
-                  className="w-full aspect-16/10 md:aspect-5/3 rounded-lg object-cover object-top"
-                />
+      <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+        {cards.map((card, index) => {
+          const cardId = `card-${card.sectionslug}-${id}`
+          return (
+            <FadeIn key={card.sectionslug} delay={200} duration={600}>
+              <motion.div
+                layoutId={`card-${cardId}`}
+                key={card.title}
+                onClick={() => setActive(card)}
+                className="flex w-full cursor-pointer flex-col rounded-lg p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+              >
+                <div className="flex w-full flex-col gap-4">
+                  <motion.div layoutId={`image-${cardId}`}>
+                    <img
+                      src={card.src}
+                      alt={card.title}
+                      className="aspect-16/10 w-full rounded-lg object-cover object-top md:aspect-5/3"
+                    />
+                  </motion.div>
+                  <div className="flex flex-col items-start justify-center">
+                    <motion.h3
+                      layoutId={`title-${cardId}`}
+                      className="text-left text-base font-medium text-neutral-800 dark:text-neutral-200"
+                    >
+                      {card.title}
+                    </motion.h3>
+                    <motion.p
+                      layoutId={`description-${cardId}`}
+                      className="text-center text-base text-neutral-600 md:text-left dark:text-neutral-400"
+                    >
+                      {card.description}
+                    </motion.p>
+                  </div>
+                </div>
               </motion.div>
-              <div className="flex justify-center items-start flex-col">
-                <motion.h3
-                  layoutId={`title-${card.title}-${id}`}
-                  className="font-medium text-neutral-800 dark:text-neutral-200 text-left text-base"
-                >
-                  {card.title}
-                </motion.h3>
-                <motion.p
-                  layoutId={`description-${card.description}-${id}`}
-                  className="text-neutral-600 dark:text-neutral-400 text-center md:text-left text-base"
-                >
-                  {card.description}
-                </motion.p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </FadeIn>
+          );
+        })}
       </ul>
     </>
   );
@@ -193,29 +207,3 @@ export const CloseIcon = () => {
     </motion.svg>
   );
 };
-
-const cards = [
-  {
-    description: "Lana Del Rey",
-    title: "Summertime Sadness",
-    src: "https://assets.aceternity.com/demos/lana-del-rey.jpeg",
-    ctaText: "Visit",
-    ctaLink: "https://ui.aceternity.com/templates",
-    content: () => {
-      return (
-        <p>
-          Lana Del Rey, an iconic American singer-songwriter, is celebrated for
-          her melancholic and cinematic music style. Born Elizabeth Woolridge
-          Grant in New York City, she has captivated audiences worldwide with
-          her haunting voice and introspective lyrics. <br /> <br /> Her songs
-          often explore themes of tragic romance, glamour, and melancholia,
-          drawing inspiration from both contemporary and vintage pop culture.
-          With a career that has seen numerous critically acclaimed albums, Lana
-          Del Rey has established herself as a unique and influential figure in
-          the music industry, earning a dedicated fan base and numerous
-          accolades.
-        </p>
-      );
-    },
-  },
-];

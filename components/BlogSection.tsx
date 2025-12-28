@@ -1,5 +1,6 @@
 import { getBlogsBySection, getBlogSections } from "@/lib/blogs";
 import ExpandableCardsGrid from "./ExpandableCardsGrid";
+import FadeIn from "./FadeIn";
 
 export default async function BlogsSection() {
   const sections = await getBlogSections();
@@ -26,8 +27,10 @@ export default async function BlogsSection() {
 
   return (
     <section className="mt-12 flex flex-col gap-8">
-      <h1 className="text-2xl">things i've been up to</h1>
+      <FadeIn delay={350}>
+        <h1 className="text-2xl">things i've been up to</h1>
+      </FadeIn>
       <ExpandableCardsGrid data={data} />
     </section>
-  )
+  );
 }

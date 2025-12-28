@@ -16,11 +16,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`antialiased relative flex justify-center`}>
+      <body
+        className={`relative min-h-screen overflow-x-hidden overflow-y-scroll`}
+      >
         {children}
-        <SnowfallCanvas />
-        <CursorGlow />
-        <GridBackground />
+        <div className="pointer-events-none fixed inset-0 -z-10">
+          <SnowfallCanvas />
+        </div>
+
+        <div className="pointer-events-none fixed inset-0 -z-100">
+          <CursorGlow />
+        </div>
+
+        <div className="pointer-events-none fixed inset-0 -z-1000">
+          <GridBackground />
+        </div>
       </body>
     </html>
   );

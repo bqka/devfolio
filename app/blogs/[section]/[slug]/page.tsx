@@ -12,10 +12,10 @@ export default async function BlogPage({
   const blog = await getBlogBySlug(section, slug);
 
   return (
-    <main className="blog flex flex-col max-w-2xl w-full mb-20 pt-20 px-6">
+    <main className="blog mx-auto mb-20 flex w-full max-w-2xl flex-col pt-20">
       <Link
         href="/"
-        className="flex flex-row items-center gap-1 text-muted text-sm font-medium hover:cursor-pointer hover:scale-102 animate-all duration-200 hover:text-primary/80"
+        className="text-muted animate-all hover:text-primary/80 flex flex-row items-center gap-1 text-sm font-medium duration-200 hover:scale-102 hover:cursor-pointer"
       >
         <ArrowLeft className="inline-block" size={18} />
         <span>Back to Home</span>
