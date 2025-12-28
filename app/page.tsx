@@ -7,16 +7,16 @@ export default function Home() {
   const [firstName, lastName] = profile.name.split(" ");
 
   return (
-    <main className="mx-auto mb-20 flex max-w-2xl flex-col pt-20">
+    <main className="mx-auto mb-20 flex max-w-2xl flex-col pt-20 px-4">
       <header>
         <div className="flex flex-col gap-6">
           <div className="flex flex-row items-center gap-6">
             {/* Profile Image */}
             <FadeIn delay={150}>
-              <div className="size-18 rounded-full bg-slate-600" />
+              <div className="size-24 sm:size-18 rounded-full bg-slate-600" />
             </FadeIn>
 
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <div className="overflow-hidden pb-[0.15rem]">
                 <FadeIn delay={100} duration={200}>
                   <span className="animate-in slide-in-from-right-100 cubic-bezier(0.22, 1, 0.36, 1) inline-block text-5xl leading-tight duration-1100">
