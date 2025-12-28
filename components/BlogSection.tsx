@@ -1,5 +1,5 @@
 import { getBlogsBySection, getBlogSections } from "@/lib/blogs";
-import ExpandableCardDemo from "./ExpandableCardsGrid";
+import ExpandableCardsGrid from "./ExpandableCardsGrid";
 
 export default async function BlogsSection() {
   const sections = await getBlogSections();
@@ -24,5 +24,10 @@ export default async function BlogsSection() {
     })
   );
 
-  return <ExpandableCardDemo data={data} />;
+  return (
+    <section className="mt-12 flex flex-col gap-8">
+      <h1 className="text-2xl">things i've been up to</h1>
+      <ExpandableCardsGrid data={data} />
+    </section>
+  )
 }

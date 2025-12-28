@@ -35,7 +35,8 @@
               "title": "content"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -197,10 +198,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "50e89ff92776315d",
+  "active": "12b905f91b3d2e5f",
   "lastOpenFiles": [
-    "development/01/content.md",
     "nodemodules/01/content.md",
+    "development/01/content.md",
     "development/01/attachments/image1.png",
     "Untitled.base",
     "nodemodules/01/attachments/Pasted image 20251228163146.png",

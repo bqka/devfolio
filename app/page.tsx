@@ -5,12 +5,11 @@ export default function Home() {
   const { profile, links, points } = content;
 
   return (
-    <main className="flex flex-col w-[40%] pt-16">
+    <main className="flex flex-col max-w-3xl pt-20 px-6 mb-20">
       <header>
         <div className="flex flex-col gap-6">
           <div className="flex flex-row gap-6 items-center">
             <div className="size-18 rounded-full bg-slate-600" />
-
             <span className="text-5xl">{profile.name}</span>
           </div>
 

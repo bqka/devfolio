@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import { SparklesCore } from "@/components/ui/sparkles";
 import SnowfallCanvas from "@/components/SnowfallCanvas";
 import CursorGlow from "@/components/CursorGlow";
 import { GridBackground } from "@/components/ui/GridBackground";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark h-full">
-      <body className={`antialiased h-full relative flex justify-center`}>
+    <html lang="en" className="dark">
+      <body className={`antialiased relative flex justify-center`}>
         {children}
         <SnowfallCanvas />
         <CursorGlow />

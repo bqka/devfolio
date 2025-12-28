@@ -31,9 +31,8 @@ export async function getBlogSections() {
 
 export async function getBlogsBySection(section: string): Promise<BlogMeta[]> {
   const sectionDirs = await fs.readdir(blogsDirectory);
-  const dirname = sectionDirs.filter(dir => dir.toLowerCase() === section.toLowerCase())[0];
+  const dirname = sectionDirs.filter(dir => dir === section)[0];
   const dir = await fs.readdir(path.join(blogsDirectory, dirname), { withFileTypes: true });
-  console.log(dir)
 
   return Promise.all(dir
     .filter(slug => slug.isDirectory())
@@ -64,7 +63,6 @@ export async function getBlogBySlug(section: string, slug: string) {
     .use(remarkObsidianImages, { section, slug })
     .use(rehypeHighlight)
     .process(content);
-    console.log(processed)
 
   return {
     slug,

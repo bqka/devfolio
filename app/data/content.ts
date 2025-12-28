@@ -4,12 +4,12 @@ export const content = {
     bio: "Pre-Final year student @ Delhi Technological University, open for Freelancing projects and collaborations.",
   },
   links: [
-    { label: "GitHub", href: "https://www.github.com/bqka" },
+    { label: "GitHub", href: "https://github.com/bqka" },
     {
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/aditya-mendiratta-12b9b227a",
     },
-    { label: "Codeforces", href: "https://www.codeforces.com/bqka" },
+    { label: "Codeforces", href: "https://codeforces.com/profile/bqka" },
   ],
   points: [
     "Building projects with MERN and Next.js",
