@@ -1,15 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { EFFECTS_CONFIG } from "@/app/config/effects";
 
-const CONFIG = {
-  radius: 350,
-  colorVar: "--cursor-glow",
-  intensity: 0.15,
-
-  followSpeed: 0.5,
-  followDelay: 8,
-};
+const CONFIG = EFFECTS_CONFIG.cursor;
 
 type Point = { x: number; y: number };
 

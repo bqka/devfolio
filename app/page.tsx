@@ -1,7 +1,9 @@
-import { links } from "./data/links";
-import { points } from "./data/points";
+import BlogsSection from "@/components/BlogSection";
+import { content } from "./data/content";
 
 export default function Home() {
+  const { profile, links, points } = content;
+
   return (
     <main className="flex flex-col w-[40%] pt-16">
       <header>
@@ -9,10 +11,10 @@ export default function Home() {
           <div className="flex flex-row gap-6 items-center">
             <div className="size-18 rounded-full bg-slate-600" />
 
-            <span className="text-5xl">Aditya Mendiratta</span>
+            <span className="text-5xl">{profile.name}</span>
           </div>
 
-          <p>Super cool intro that proves im cracked.</p>
+          <p>{profile.bio}</p>
         </div>
       </header>
 
@@ -31,6 +33,8 @@ export default function Home() {
           ))}
         </ul>
       </section>
+
+      <BlogsSection />
     </main>
   );
 }

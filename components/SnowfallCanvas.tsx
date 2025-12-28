@@ -1,34 +1,9 @@
 "use client";
 
+import { EFFECTS_CONFIG } from "@/app/config/effects";
 import { useEffect, useRef } from "react";
 
-/* =========================
-   CONFIG – unchanged values
-   ========================= */
-const CONFIG = {
-  flakeCount: 150,
-  windSpeed: 0.15,
-
-  minSize: 1.2,
-  maxSize: 5.2,
-
-  minOpacity: 0.25,
-  maxOpacity: 0.8,
-
-  minFallSpeed: 0.2,
-  maxFallSpeed: 0.8,
-
-  minWobbleAmplitude: 4,
-  maxWobbleAmplitude: 30,
-
-  minWobbleSpeed: 0.002,
-  maxWobbleSpeed: 0.01,
-
-  colorVar: "--snow-color",
-  glowColorVar: "--snow-glow",
-  glow: true,
-  glowBlur: 5,
-};
+const CONFIG = EFFECTS_CONFIG.snow;
 
 type Flake = {
   baseX: number;
@@ -78,7 +53,7 @@ export default function SnowfallCanvas() {
 
     function createFlake(): Flake {
       return {
-        baseX: Math.random() * (width + 200) - 200,
+        baseX: Math.random() * (width + 300) - 300,
         y: -Math.random() * height, // top → bottom
         r: rand(CONFIG.minSize, CONFIG.maxSize),
         speed: rand(CONFIG.minFallSpeed, CONFIG.maxFallSpeed),
