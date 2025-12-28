@@ -28,7 +28,7 @@ export default async function BlogsSection() {
   return (
     <section className="mt-12 flex flex-col gap-8">
       <FadeIn delay={350}>
-        <h1 className="text-2xl">things i've been up to</h1>
+        <h1 className="text-3xl">things i've been up to</h1>
       </FadeIn>
       <ExpandableCardsGrid data={data} />
     </section>

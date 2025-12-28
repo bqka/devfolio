@@ -16,10 +16,10 @@ export default function Home() {
               <div className="size-24 sm:size-18 rounded-full bg-slate-600" />
             </FadeIn>
 
-            <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex flex-col sm:flex-row gap-2 text-5xl sm:text-6xl">
               <div className="overflow-hidden pb-[0.15rem]">
                 <FadeIn delay={100} duration={200}>
-                  <span className="animate-in slide-in-from-right-100 cubic-bezier(0.22, 1, 0.36, 1) inline-block text-5xl leading-tight duration-1100">
+                  <span className="animate-in slide-in-from-right-100 cubic-bezier(0.22, 1, 0.36, 1) inline-block leading-tight duration-1100">
                     {firstName}
                   </span>
                 </FadeIn>
@@ -27,7 +27,7 @@ export default function Home() {
               <div className="relative overflow-hidden pb-[0.15rem]">
                 <div className="absolute inset-0 z-0 bg-purple-300/20" />
                 <FadeIn delay={200} duration={200}>
-                  <span className="animate-in slide-in-from-right-100 relative z-10 inline-block text-5xl leading-tight duration-1600">
+                  <span className="animate-in slide-in-from-right-100 relative z-10 inline-block leading-tight duration-1600">
                     {lastName}
                   </span>
                 </FadeIn>
@@ -36,7 +36,7 @@ export default function Home() {
           </div>
 
           <FadeIn>
-            <p>{profile.bio}</p>
+            <p className="text-lg">{profile.bio}</p>
           </FadeIn>
         </div>
       </header>
@@ -49,7 +49,7 @@ export default function Home() {
               key={link.label}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted hover:text-primary inline-block text-sm transition-all duration-200 hover:scale-105"
+              className="text-muted hover:text-primary inline-block transition-all duration-200 hover:scale-105"
             >
               {link.label}
             </a>
@@ -63,7 +63,7 @@ export default function Home() {
             <FadeIn key={point} delay={100 + i * 100}>
               <li
                 key={point}
-                className="text-muted hover:text-primary text-sm transition-all duration-200 hover:scale-105"
+                className="text-muted hover:text-primary transition-all duration-200 hover:scale-105"
               >
                 {point}
               </li>
