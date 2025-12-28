@@ -20,7 +20,7 @@ export default function ExpandableCardsGrid({ data }: { data: Section[] }) {
     null
   );
   const id = useId();
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement|null>(null);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
